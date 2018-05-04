@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+        <!-- CSS Lib -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.structure.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.theme.min.css')}}">
+        <!-- Custom -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common/base.css')}}">
+        <!-- JS Lib -->
+        <script src="{{ url_for('static', filename='js/lib/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/lib/jquery-ui.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/lib/moment.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/lib/daterangepicker.js') }}"></script>
+        <!-- Custom -->
+        <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/site.js') }}"></script>
+        {% block includes %}{% endblock %}
+        <!-- Title -->
+        <title>{{ title }}</title>
+    </head>
+
+    <body>
+    {% block body %}
+        {% block header %}
+            {% include 'component/header.html' %}
+        {% endblock %}
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div id="notifs" class="notif-wrap">
+                    <div class="notif-content">
+                        <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}<span class="flash-close ui-icon ui-icon-close"></span></li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+        {% block footer %}
+            {% include 'component/footer.html' %}
+        {% endblock %}
+    {% endblock %}
+    </body>
+</html>

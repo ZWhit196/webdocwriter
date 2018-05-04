@@ -1,4 +1,9 @@
 /venv
 /.idea
-/__pycache__
 *.db
+*.DS_Store
+*.project
+*.pydevproject
+
+/__pycache__
+*.pyc

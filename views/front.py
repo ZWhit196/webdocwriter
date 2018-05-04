@@ -11,4 +11,4 @@ front_router = Blueprint('front', __name__, template_folder='templates')
 
 @front_router.route("/", methods=['GET'])
 def home():
-    return render_template("index.html")
+    return render_template("front/index.html")
