@@ -16,7 +16,6 @@ def login():
 
         ### Login code ###
 
-
         flash("You are logged in.")
         return redirect(url_for('front.home'))
 
@@ -33,7 +32,7 @@ def register():
 
         ### Register code ###
 
-        flash("You are logged in.")
+        flash("User has been registered and logged in.")
         return redirect(url_for('front.home'))
 
     if form.email.errors or form.password.errors:
@@ -52,6 +51,7 @@ def account():
 
         ### Account code ###
 
+        flash("Password has been updated.")
         return redirect(url_for('account.account'))
 
     if form.password.errors:
