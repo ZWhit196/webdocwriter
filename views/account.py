@@ -3,7 +3,7 @@ from flask.templating import render_template
 from flask.helpers import url_for
 from flask_login import login_required, login_user, logout_user, current_user
 
-from data import Get_user
+from data import Get_user, New_user
 from helpers import Respond, Get_form
 
 account_router = Blueprint('account', __name__, template_folder='templates')
@@ -32,6 +32,8 @@ def register():
     if form.validate_on_submit():
         ### Register code ###
         # TODO: Add register stuff...
+        u = New_user(form.name.data, form.password.data)
+
         flash("User has been registered and logged in.")
         return redirect(url_for('front.home'))
     if form.name.errors or form.password.errors:

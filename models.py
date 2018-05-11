@@ -1,4 +1,5 @@
 import datetime
+import os
 
 from data.database import db
 from passlib.hash import pbkdf2_sha512
@@ -72,6 +73,12 @@ class User(db.Model):
         """ commit changes to the database """
         db.session.add(self)
         db.session.commit()
+
+    def create_directory(self):
+        """ creates a directory for users docs """
+        directory = "./docs/{}".format()
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
 
 class Documents(db.Model):

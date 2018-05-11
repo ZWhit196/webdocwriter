@@ -5,7 +5,7 @@ import models
 
 def Get_user(identifier):
     if type(identifier) is str:
-        filters = {'name': identifier}
+        filters = {'name': identifier.lower()}
     elif type(identifier) is int:
         filters = {'uid': identifier}
     else:
@@ -17,3 +17,8 @@ def Is_user(identifier):
     if Get_user(identifier) is not None:
         return True
     return False
+
+
+def New_user(name, password):
+    print(name, password)
+    u = models.User(name, password)
