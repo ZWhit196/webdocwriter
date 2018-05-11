@@ -1,15 +1,23 @@
-from data.database import db
-
-from models import User
-
-
+"""
+    A small class to easily create and execute queries after given the table to query,
+alongside the joins (if any) and filters (if any) for the query.
+"""
 class Query_Interface():
+    """
+    :param tbl: models.py Table.
+    :param joins: Python list of [<table name>,...].
+    :param filters: Python dict of {<field>: <value>/[<value1>,...]}
+    :param first: Boolean for either first record or all records.
+    """
 
     Main_table = None
     Join = []
     Filters = {}
     First = True
     Q = None
+    Join_types = {
+        'User': {'Direct': None, 'Secondary': None}
+    }
 
     def __init__(self, tbl, joins=[], filters={}, first=True):
         self.Main_table = tbl
@@ -21,7 +29,7 @@ class Query_Interface():
         else:
             raise TypeError("`joins` parameter accepts list of str or str")
         if type(filters) is not dict:
-            raise TypeError("`filters` parameter accepts python dict `{<filter>: <value>}` or `{<filter>: [<value1>,...]`")
+            raise TypeError("`filters` parameter accepts dict `{<filter>: <value>}` or `{<filter>: [<value1>,...]`")
         else:
             self.Filters = filters
 
@@ -57,20 +65,14 @@ class Query_Interface():
         else:
             return self.Q.all()
 
-    def _joins(self, query):
+    def _joins(self, query):  # TODO: Add some join code...
         for j in self.Join:
             pass
         return query
 
-    def _filters(self, query):
+    def _filters(self, query):  # TODO: Add some filters code...
         for f in self.Filters:
             pass
         return query
 
 # End class #
-
-
-def Get_user(name, first=True):
-    filters = {'name': name}
-    QI = Query_Interface(User, filters=filters, first=first)
-    return QI.Fetch()

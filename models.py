@@ -72,3 +72,18 @@ class User(db.Model):
         """ commit changes to the database """
         db.session.add(self)
         db.session.commit()
+
+
+class Documents(db.Model):
+    did = db.Column('did', db.Integer, primary_key=True, nullable=False)
+    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
+    doc_name = db.Column(db.String(256), nullable=False)
+    doc_type = db.Column(db.String(8), nullable=False)
+    doc_created = db.Column(db.DateTime())
+    doc_path = db.Column(db.Text, nullable=False)
+
+    def __init__(self, name, typ, created, path):
+        self.doc_name = name
+        self.doc_type = typ
+        self.doc_created = created
+        self.doc_path = path

@@ -1,12 +1,14 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, validators
 
-from data import Is_user # TO ADD
+from data import Get_user, Is_user # TO ADD
 
 
 messages = {
     'pass': "The password must be 6 or more characters long, contain 1 number and 1 letter.",
-    'name': "This name is already in use."
+    'bad_pass': "The username/password combination is incorrect.",
+    'name': "This name is already in use.",
+    'no_user': "No user exists for this name."
 }
 
 
@@ -22,11 +24,9 @@ class Reg_Form(FlaskForm):
         rv = FlaskForm.validate(self)
         if not rv:
             return False
-        # password validation checks
         if len(self.password.data) < 6 or self.password.data.isalpha() or self.password.data.isdigit():
             self.password.errors.append(messages['pass'])
             return False
-        # check if the email is already in the DB
         if Is_user(self.name.data):
             self.name.errors.append(messages['name'])
             return False
@@ -41,9 +41,14 @@ class Login_form(FlaskForm):
         rv = FlaskForm.validate(self)
         if not rv:
             return False
-        # password validation checks
         if len(self.password.data) < 6 or self.password.data.isalpha() or self.password.data.isdigit():
             self.password.errors.append(messages['pass'])
+            return False
+        if not Is_user(self.name.data):
+            self.name.errors.append(messages['no_user'])
+            return False
+        if not Get_user(self.name.data).verify_password(self.password.data):
+            self.password.errors.append(messages['bad_pass'])
             return False
         return True
 
@@ -55,7 +60,6 @@ class Password_form(FlaskForm):
         rv = FlaskForm.validate(self)
         if not rv:
             return False
-        # password validation checks
         if len(self.password.data) < 6 or self.password.data.isalpha() or self.password.data.isdigit():
             self.password.errors.append(messages['pass'])
             return False

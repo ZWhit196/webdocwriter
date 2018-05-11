@@ -5,6 +5,11 @@
 <div class="content-wrap">
     <div>
         <p>Placeholder content</p>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        {% if current_user.is_authenticated %}
+        <a href="/account">Account</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
