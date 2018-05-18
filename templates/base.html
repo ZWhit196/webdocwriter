@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- TODO: Add favicon at some point: Low priority... -->
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+        <!--<meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">-->
         <meta name="theme-color" content="#ffffff">
         <!-- CSS Lib -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.min.css')}}">
@@ -12,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.theme.min.css')}}">
         <!-- Custom -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common/base.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme/standard.theme.css')}}">
         <!-- JS Lib -->
         <script src="{{ url_for('static', filename='js/lib/jquery.js') }}"></script>
         <script src="{{ url_for('static', filename='js/lib/jquery-ui.min.js') }}"></script>
@@ -37,7 +40,7 @@
                     <div class="notif-content">
                         <ul>
                         {% for message in messages %}
-                            <li>{{ message }}<span class="flash-close ui-icon ui-icon-close"></span></li>
+                            <li>{{ message }}<!--<span class="flash-close ui-icon ui-icon-close"></span>--></li>
                         {% endfor %}
                         </ul>
                     </div>

@@ -20,5 +20,7 @@ def Is_user(identifier):
 
 
 def New_user(name, password):
-    print(name, password)
     u = models.User(name, password)
+    u.commit_self()
+    u.create_directory()
+    return u

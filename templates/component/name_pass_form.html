@@ -4,5 +4,9 @@
     <input type="text" id="name" name="name" placeholder="Username">
     <span>Password:</span>
     <input type="password" id="password" name="password" placeholder="Password">
+    {% if confirm %}
+    <span>Confirm:</span>
+    <input type="password" id="confirm" name="confirm" placeholder="Confirm">
+    {% endif %}
     <input type="submit" name="submit" id="submit" value="Enter">
 </form>

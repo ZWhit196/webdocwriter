@@ -2,8 +2,9 @@ import os
 import traceback
 
 from flask import Flask, request
-from flask.templating import render_template
 from flask_login import LoginManager
+from flask.templating import render_template
+from flask_wtf.csrf import CSRFProtect, CSRFError
 
 from data.database import db
 from helpers import Respond
@@ -44,25 +45,28 @@ def create_app():
     # login manager
     login_manager = LoginManager()
     login_manager.init_app(app)
-    login_manager.login_view = 'accounts.login'
+    login_manager.login_view = 'account.login'
 
-    @login_manager.user_loader  # keeps the user in the session
-    def load_user(id):
-        return User.query.get(int(id))
+    @login_manager.user_loader   # keeps the user in the session
+    def load_user(uid):
+        return User.query.get(int(uid))
+
+    CSRFProtect().init_app(app)  # CSRF PROTECTION
 
     @app.errorhandler(400)
     @app.errorhandler(403)
     @app.errorhandler(404)
     @app.errorhandler(500)
+    @app.errorhandler(CSRFError)
     def error_loading(ex):
-        cd = 500
-        msg = "An error occurred."
+        cd = 400
+        msg = "An error occurred with your request."
         if ex.code:
             cd = ex.code
         if cd == 500:
             traceback.print_exc()
-        if request.method == 'POST':
-            return Respond(msg, status=ex.code)
+        if request.method == 'POST' or "static" in request.url:
+            return Respond(msg, ex.code, ty="Err")
         return render_template('error.html', err=cd, msg=msg)
 
     routes = views.Get_routes()

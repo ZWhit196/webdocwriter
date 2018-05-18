@@ -76,9 +76,15 @@ class User(db.Model):
 
     def create_directory(self):
         """ creates a directory for users docs """
-        directory = "./docs/{}".format()
+        directory = "./docs/{}".format(self.name)
+        saves_directory = "./docs/{}/saves".format(self.name)
         if not os.path.exists(directory):
             os.makedirs(directory)
+        if not os.path.exists(saves_directory):
+            os.makedirs(saves_directory)
+
+    def get_dir(self):
+        return "./docs/{}".format(self.name)
 
 
 class Documents(db.Model):

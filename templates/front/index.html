@@ -5,10 +5,13 @@
 <div class="content-wrap">
     <div>
         <p>Placeholder content</p>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
         {% if current_user.is_authenticated %}
         <a href="/account">Account</a>
+        <a href="/create/document">Create Document</a>
+        <a href="/logout">Logout</a>
+        {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
         {% endif %}
     </div>
 </div>
