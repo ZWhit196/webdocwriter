@@ -27,6 +27,9 @@ class User(db.Model):
     def __repr__(self):
         return '<User: {}>'.format(self.name)
 
+    def __str__(self):
+        return "User"
+
     # functions for login manager
     def is_authenticated(self):
         return True
@@ -78,10 +81,16 @@ class User(db.Model):
         """ creates a directory for users docs """
         directory = "./docs/{}".format(self.name)
         saves_directory = "./docs/{}/saves".format(self.name)
+        excel_directory = "./docs/{}/excel".format(self.name)
+        word_directory = "./docs/{}/word".format(self.name)
         if not os.path.exists(directory):
             os.makedirs(directory)
         if not os.path.exists(saves_directory):
             os.makedirs(saves_directory)
+        if not os.path.exists(excel_directory):
+            os.makedirs(excel_directory)
+        if not os.path.exists(word_directory):
+            os.makedirs(word_directory)
 
     def get_dir(self):
         return "./docs/{}".format(self.name)
@@ -100,3 +109,6 @@ class Documents(db.Model):
         self.doc_type = typ
         self.doc_created = created
         self.doc_path = path
+
+    def __str__(self):
+        return "Documents"

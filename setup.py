@@ -60,7 +60,7 @@ def create_app():
     @app.errorhandler(CSRFError)
     def error_loading(ex):
         cd = 400
-        msg = "An error occurred with your request."
+        msg = "There was an issue in your request, try refreshing your page and trying again."
         if ex.code:
             cd = ex.code
         if cd == 500:

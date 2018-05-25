@@ -16,7 +16,8 @@ class Query_Interface():
     First = True
     Q = None
     Join_types = {
-        'User': {'Direct': None, 'Secondary': None}
+        'User': {'Direct': None, 'Secondary': None},
+        'Documents': {'Direct': ['User'], 'Secondary': None}
     }
 
     def __init__(self, tbl, joins=[], filters={}, first=True):
@@ -65,9 +66,14 @@ class Query_Interface():
         else:
             return self.Q.all()
 
-    def _joins(self, query):  # TODO: Add some join code...
+    def _joins(self, query, main):  # TODO: Add some join code...
+        joins = self.Join_types.get(main, None)
         for j in self.Join:
-            pass
+            if j in joins['Direct']:
+                query = query.join()  # TODO: Thank you, come again!
+            elif j in joins['Secondary']:
+                print("Secondary not implemented!")  # TODO: Any secondary joins?
+                pass
         return query
 
     def _filters(self, query):  # TODO: Add some filters code...

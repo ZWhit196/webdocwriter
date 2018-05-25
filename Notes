@@ -1,0 +1,20 @@
+:Information:
+
+=Data Structure=
+
+{
+    <workbook_name> : [
+        {
+            <sheet_1> : [
+                "plain_cell_content",
+                {
+                    <cell_content>: {<format_option>: <format_value>},
+                    ... <other content/format>...
+                },
+                ...
+            ]
+        },
+        ... <other sheets>...
+    ],
+    ... <other workbooks>...
+}

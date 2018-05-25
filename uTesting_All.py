@@ -1,6 +1,6 @@
 import unittest
 
-from Testing__server import FlaskTestCase
+from uTesting_server import FlaskTestCase
 
 '''
     This file executes ALL of the test files. 
