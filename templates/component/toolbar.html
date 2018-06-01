@@ -1,0 +1,29 @@
+<div id="Toolbar">
+    <div id="File">
+        <div>
+            <button data-opt="save">Save</button>
+            <button data-opt="import">Import</button>
+        </div>
+    </div>
+    <div id="Text">
+        <div>
+            <button data-opt="bold" title="Bold">Bold</button>
+            <button data-opt="under" title="Underline">Underline</button>
+            <button data-opt="italic" title="Italic">Italic</button>
+        </div>
+    </div>
+    {% if spreadsheet %}
+    <div id="Cells">
+        <div>
+            <button data-opt="row+" title="New row">New row</button>
+            <button data-opt="col+" title="New column">New column</button>
+        </div>
+    </div>
+    <div id="Formula">
+        <div>
+            <button data-opt="sum" title="Sum">Sum</button>
+            <button data-opt="sum" title="Mean">Mean Average</button>
+        </div>
+    </div>
+    {% endif %}
+</div>

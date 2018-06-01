@@ -1,10 +1,49 @@
 {% extends "base.html" %}
 {% set title = 'New Document' %}
 
+{% block includes %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme/Sheet.css')}}">
+<script src="{{ url_for('static', filename='js/pages/doc_saver.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pages/Sheet.js') }}"></script>
+{% endblock %}
+
 {% block content %}
 <div class="content-wrap">
     <div>
         <p>Create a spreadsheet on this page.</p>
+        {% with spreadsheet = True %}
+        {% include "component/toolbar.html" %}
+        {% endwith %}
+        <div id="Workzone">
+            <div class="container">
+                <table id="Sheet">
+                    <tr class="sheet_head">
+                        <th></th>
+                        <th data-col="A">A</th>
+                        <th data-col="B">B</th>
+                        <th data-col="C">C</th>
+                        <th data-col="D">D</th>
+                        <th data-col="E">E</th>
+                        <th data-col="F">F</th>
+                        <th data-col="G">G</th>
+                        <th data-col="H">H</th>
+                        <th data-col="I">I</th>
+                        <th data-col="J">J</th>
+                    </tr>
+                    {% for i in range(10) %}
+                    <tr class="sheet_row">
+                        <td data-row="{{i}}">{{i+1}}</td>
+                        {% for j in range(10) %}
+                        <td class="cell"><input type="text"></td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                    
+                </table>
+            </div>
+        </div>
+        
     </div>
 </div>
 {% endblock %}

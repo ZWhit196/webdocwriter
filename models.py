@@ -1,4 +1,5 @@
 import datetime
+import json
 import os
 
 from data.database import db
@@ -12,6 +13,7 @@ class User(db.Model):
     account_created = db.Column(db.DateTime())
     is_admin = db.Column(db.Boolean(), nullable=False, default=False)
     last_login = db.Column(db.DateTime())
+    documents = db.relationship('Documents', backref='user')
     # _games = db.relationship('Game', secondary=User_games, backref=db.backref('User_games', lazy='dynamic'),
     #                          lazy='dynamic', primaryjoin='User_games.c.uid==User.uid',
     #                          secondaryjoin='User_games.c.gid==Game.gid', cascade="save-update, merge, delete")
@@ -92,8 +94,15 @@ class User(db.Model):
         if not os.path.exists(word_directory):
             os.makedirs(word_directory)
 
-    def get_dir(self):
+    def get_user_dir(self):
         return "./docs/{}".format(self.name)
+    
+    def save_content(self, content, name):
+        if content != {}:
+            dir_path = "./docs/{}/saves".format(self.name)
+            json.dump(content, dir_path+"/{}.json".format(name))
+            return True
+        return False
 
 
 class Documents(db.Model):
@@ -112,3 +121,8 @@ class Documents(db.Model):
 
     def __str__(self):
         return "Documents"
+    
+    def commit_self(self):
+        """ commit changes to the database """
+        db.session.add(self)
+        db.session.commit()

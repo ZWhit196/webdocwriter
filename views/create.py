@@ -15,3 +15,12 @@ def document():
         return render_template("create/document.html")
     flash("Posted")
     return Respond("Posted", 200)
+
+
+@create_router.route("/create/spreadsheet", methods=['GET', 'POST'])
+@login_required
+def spreadsheet():
+    if request.method == "GET":
+        return render_template("create/spreadsheet.html")
+    flash("Posted")
+    return Respond("Posted", 200)

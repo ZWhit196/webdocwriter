@@ -1,0 +1,13 @@
+#Sheet {
+    border-collapse: collapse;
+}
+
+#Sheet tbody tr td, #Sheet tbody tr th {
+    border: 1px solid #000;
+    padding: 2px;
+}
+
+#Sheet tbody tr td input[type="text"] {
+    border: 0px;
+    width: 100px;
+}
