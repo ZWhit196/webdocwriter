@@ -22,5 +22,7 @@ def document():
 def spreadsheet():
     if request.method == "GET":
         return render_template("create/spreadsheet.html")
-    flash("Posted")
+    print("POSTED")
+    print(request.data)
+
     return Respond("Posted", 200)

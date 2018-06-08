@@ -13,7 +13,7 @@ function AjaxCall() {
         contentType: 'application/json'
     }).done(function(dt) {
         callback(dt);
-        NullAjaxArgs();
+        NullAjaxArgs(); // move to `.always`
     });
 }
 

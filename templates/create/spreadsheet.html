@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+{% include "component/csrf_token_js.html" %}
 <div class="content-wrap">
     <div>
         <p>Create a spreadsheet on this page.</p>
@@ -38,7 +39,6 @@
                         {% endfor %}
                     </tr>
                     {% endfor %}
-                    <tr>
                     
                 </table>
             </div>

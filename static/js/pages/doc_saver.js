@@ -1,4 +1,4 @@
-var save_timer = 2*60*1000; // num of mins as milliseconds - DEFAULT 1 MIN
+var save_timer = 2*60*1000; // num of mins as milliseconds - DEFAULT 2 MIN
 var timer = null;
 
 $(document).ready(function($){
@@ -27,10 +27,15 @@ function Start_timer() {
 
 function Save() {
     console.log("Save");
-    ajaxobj = Get_save_object();
-    callback = Success;
-    errorback = Fail;
-    
+    SetAjaxArgs(Get_save_object(), Success, Fail);
+    AjaxCall();
+    NullAjaxArgs();
 }
-function Success() {}
-function Fail() {}
+
+function Success(data) {
+    console.log("Saved!",data);
+}
+
+function Fail() {
+    console.log("There was a problem...");
+}
