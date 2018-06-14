@@ -20,7 +20,7 @@ def Settings():
     settings = {
         'DEBUG': True,
         'JS_TEST': False,
-        'SECRET_KEY': GenerateKey(),
+        'SECRET_KEY': 'a',#GenerateKey(),
         'SQLALCHEMY_TRACK_MODIFICATIONS': False,
         'SQLALCHEMY_DATABASE_URI': 'sqlite:///DataStore.db',
         'WTF_CSRF_SECRET_KEY': GenerateKey()

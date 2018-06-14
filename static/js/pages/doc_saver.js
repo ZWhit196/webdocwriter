@@ -26,16 +26,14 @@ function Start_timer() {
 
 
 function Save() {
-    console.log("Save");
-    SetAjaxArgs(Get_save_object(), Success, Fail);
+    SetAjaxArgs(Get_save_object(), Success_func, Fail_func);
     AjaxCall();
-    NullAjaxArgs();
 }
 
-function Success(data) {
+function Success_func(data) {
     console.log("Saved!",data);
 }
 
-function Fail() {
+function Fail_func() {
     console.log("There was a problem...");
 }

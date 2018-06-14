@@ -1,9 +1,10 @@
-from flask import Blueprint, request, flash  # , redirect, jsonify, abort
+from flask import Blueprint, request, flash, jsonify  # , redirect, abort
 from flask.templating import render_template
 # from flask.helpers import url_for
 from flask_login import login_required, current_user
 
 from helpers import Respond
+from data import ExcelCreator
 
 create_router = Blueprint('create', __name__, template_folder='templates')
 
@@ -22,7 +23,7 @@ def document():
 def spreadsheet():
     if request.method == "GET":
         return render_template("create/spreadsheet.html")
-    print("POSTED")
-    print(request.data)
-
-    return Respond("Posted", 200)
+    
+    end = ExcelCreator(request.data.decode("utf-8"), current_user)
+    
+    return jsonify("Passed")

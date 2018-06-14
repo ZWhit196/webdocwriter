@@ -1,7 +1,11 @@
 var ajaxobj = {}, callback = Generic_callback, errorback = Generic_error;
 
 
-function SetAjaxArgs(o, c, e) { ajaxobj = o; callback = c; errorback = e; }
+function SetAjaxArgs(o, c, e) { 
+    ajaxobj = o; 
+    callback = c; 
+    errorback = e; 
+}
 
 function NullAjaxArgs() { ajaxobj = null; callback = null; errorback = null; }
 
@@ -13,7 +17,10 @@ function AjaxCall() {
         contentType: 'application/json'
     }).done(function(dt) {
         callback(dt);
-        NullAjaxArgs(); // move to `.always`
+        NullAjaxArgs();
+    }).fail(function() {
+        errorback();
+        NullAjaxArgs();
     });
 }
 

@@ -1,5 +1,7 @@
-# Add func
+import json
+
 from data.db_integ import Query_Interface as QI
+from data.excel_integ import ExcelWriter
 import models
 
 
@@ -24,3 +26,17 @@ def New_user(name, password):
     u.commit_self()
     u.create_directory()
     return u
+
+
+# ========================
+
+def ExcelCreator(data, user):
+    data = json.loads(data)
+    fname = list(data.keys())[0]
+    json_data = data[fname]
+    print(json_data)
+    
+    EW = ExcelWriter(fname, username=user.name)
+    
+    success = "yes"
+    return success
