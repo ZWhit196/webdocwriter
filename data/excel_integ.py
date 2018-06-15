@@ -2,6 +2,7 @@
 # http://xlsxwriter.readthedocs.io/working_with_pandas.html
 # http://pbpython.com/improve-pandas-excel-output.html <== Helpful stuff
 
+import pandas as pd
 import xlsxwriter
 
 class ExcelBase:
@@ -12,7 +13,7 @@ class ExcelBase:
     def __init__(self, fname=None, sname=None, username=None):
         if fname is not None:
             self.book_name = fname
-        self.file_path = "./docs/{}/"
+        self.file_path = "./docs/{}/excel/".format(username)
         self.workbook = xlsxwriter.Workbook("{}.xlsx".format(self.book_name))
         self.Add_sheet(sname)
 
@@ -38,7 +39,13 @@ class ExcelWriter(ExcelBase):
         if raw is None:
             print(json_name)
 
-
+    def Array_to_frame(self, data):
+        print(data)
+        cols = [x for x in range(len(data))]
+        DF = pd.DataFrame(columns=cols, data=data)
+        print(DF)
+        # print(self.file_path,self.Workbook_name())
+        # DF.to_excel(self.file_path+self.Workbook_name(),engine=pd.ExcelWriter(self.file_path+self.Workbook_name()))
 
 
 # ==============================================

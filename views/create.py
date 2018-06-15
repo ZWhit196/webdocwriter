@@ -25,5 +25,6 @@ def spreadsheet():
         return render_template("create/spreadsheet.html")
     
     end = ExcelCreator(request.data.decode("utf-8"), current_user)
+    print(end)
     
     return jsonify("Passed")

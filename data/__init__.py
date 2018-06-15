@@ -37,6 +37,7 @@ def ExcelCreator(data, user):
     print(json_data)
     
     EW = ExcelWriter(fname, username=user.name)
+    EW.Array_to_frame(json_data)
     
     success = "yes"
     return success
